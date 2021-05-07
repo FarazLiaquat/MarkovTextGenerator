@@ -46,6 +46,11 @@ namespace MarkovTextGenerator
             // TODO: Add each word pair to the chain
             // TODO: The last word of any sentence will be paired up with
             //       an empty string to show that it is the end of the sentence
+            String[] wordie = sentence.Split(' ');
+            for (int i = 0; i < wordie.Length - 1; i++)
+            {
+                AddPair(wordie[i], wordie[i+1]); 
+            }
         }
 
         // Adds a pair of words to the chain that will appear in order
