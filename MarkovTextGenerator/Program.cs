@@ -17,8 +17,8 @@ namespace MarkovTextGenerator
 
             Console.WriteLine("Enter some text I can learn from (enter single ! to finish): ");
 
-            // LoadText("Sample.txt", chain);
-
+            LoadText("Sample.txt", chain);
+            /*
             while (true)
             {
 
@@ -30,7 +30,7 @@ namespace MarkovTextGenerator
 
                 chain.AddString(line);  // Let the chain process this string
             }
-
+            */
             // Now let's update all the probabilities with the new data
             chain.UpdateProbabilities();
 
@@ -48,7 +48,7 @@ namespace MarkovTextGenerator
             int counter = 0;
             String line;
 
-            string path = Path.Combine(Environment.CurrentDirectory, $"data\\{filename}");
+            string path = Path.Combine(Environment.CurrentDirectory, $"data/{filename}");
             StreamReader file = new StreamReader(path);
             while ((line = file.ReadLine()) != null)
             {

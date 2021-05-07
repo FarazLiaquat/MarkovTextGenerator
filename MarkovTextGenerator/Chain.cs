@@ -49,7 +49,7 @@ namespace MarkovTextGenerator
             String[] wordie = sentence.Split(' ');
             for (int i = 0; i < wordie.Length - 1; i++)
             {
-                AddPair(wordie[i], wordie[i+1]); 
+                AddPair(wordie[i], wordie[i + 1]);
             }
         }
 
@@ -96,13 +96,22 @@ namespace MarkovTextGenerator
         {
             if (words.ContainsKey(word))
             {
+                double t = 0;
                 List<Word> choices = words[word];
-                double test = rand.NextDouble();
+                double b = rand.NextDouble();
 
-                Console.WriteLine("I picked the number " + test); 
+                Console.WriteLine("I picked the number " + b);
+                foreach(var choice in choices)
+                {
+                    t = t + choice.Probability;
+                    if(b < t)
+                    {
+                        return choice.ToString();
+                    }
+                }
             }
 
-            return "idkbbq";
+            return "";
         }
 
         /// <summary>
