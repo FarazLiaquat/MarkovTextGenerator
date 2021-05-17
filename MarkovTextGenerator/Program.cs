@@ -36,7 +36,7 @@ namespace MarkovTextGenerator
 
 
             String word = chain.startingwords[0];
-            for (int i = 0; i < 100; i++)
+            for (int i = 0; i < 6000; i++)
             {
                 Console.WriteLine(chain.GenerateSentence(word));
             }
