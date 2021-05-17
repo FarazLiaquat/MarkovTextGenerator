@@ -14,7 +14,7 @@ namespace MarkovTextGenerator
             Chain chain = new Chain();
 
             Console.WriteLine("Welcome to Marky Markov's Random Text Generator!");
-
+            Console.WriteLine();
             LoadText("Sample.txt", chain);
             /*
             while (true)
