@@ -11,12 +11,22 @@ namespace MarkovTextGenerator
         public Dictionary<String, List<Word>> words;
         private Dictionary<String, int> sums;
         private Random rand;
+        public List<string> startingwords;
 
         public Chain ()
         {
             words = new Dictionary<String, List<Word>>();
             sums = new Dictionary<string, int>();
             rand = new Random(System.Environment.TickCount);
+            string[] linesText = System.IO.File.ReadAllLines(@"C:\Users\coolf\OneDrive\Desktop\MarkovTextGenerator\MarkovTextGenerator\Data\Sample.txt");
+            startingwords = new List<string>();
+            for (int i = 0; i < linesText.Length-1; i++)
+            {
+                string z = linesText[i];
+                string[] wordsText = z.Split(' ');
+                startingwords.Add(wordsText[0]);
+            }
+            
         }
 
         /// <summary>
@@ -51,6 +61,7 @@ namespace MarkovTextGenerator
             {
                 AddPair(wordie[i], wordie[i + 1]);
             }
+                AddPair(wordie[wordie.Length-1], "  ");
         }
 
         // Adds a pair of words to the chain that will appear in order
@@ -100,7 +111,6 @@ namespace MarkovTextGenerator
                 List<Word> choices = words[word];
                 double b = rand.NextDouble();
 
-                Console.WriteLine("I picked the number " + b);
                 foreach(var choice in choices)
                 {
                     t = t + choice.Probability;
@@ -120,9 +130,25 @@ namespace MarkovTextGenerator
         /// </summary>
         /// <param name="startingWord"></param>
         /// <returns></returns>
-        public static String GenerateSentence(string startingWord)
+        public String GenerateSentence(string startingWord)
         {
-            return "";
+            int length = startingwords.Count;
+            int num = rand.Next(length);
+            startingWord = startingwords[num];
+            string a = startingWord;
+            for (int i = 0; i <= 100; i++)
+            {
+                String nextWord = GetNextWord(a);
+                a = nextWord;
+                startingWord = startingWord + " " + nextWord;
+                if(a == "  ")
+                {
+                    break;
+                }
+            }
+
+
+            return startingWord;
         }
         
         /// <summary>
